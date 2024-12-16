@@ -1,0 +1,26 @@
+{
+  "name": "exerciseexpress",
+  "version": "1.0.0",
+  "description": "Ejercicio con libreria Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryanEnriquez1/ExerciseExpress.git"
+  },
+  "keywords": [
+    "Express",
+    "node"
+  ],
+  "author": "BAEC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BryanEnriquez1/ExerciseExpress/issues"
+  },
+  "homepage": "https://github.com/BryanEnriquez1/ExerciseExpress#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
