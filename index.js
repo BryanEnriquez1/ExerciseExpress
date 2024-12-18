@@ -13,11 +13,6 @@ var lista = [{
 app.get('/nombre',(req,res)=>{
     res.json(lista);
 });
-app.get('/buscausu/:id',(req,res)=>{
-    let id = req.params.id;
-    let usuario = lista.find(item => item.id === id);
-    res.json(usuario);
-});
 app.get('/Alexander',(req,res)=>{
     res.send('Hola me llamo Alexander Enriquez, tengo 22 años, me gusta progrmar, entrenar MMA y tambien tocar la guitarra');
 });
@@ -32,6 +27,59 @@ app.get('/sumacli/:n1',(req,res)=>{
     let sum = a+b;
     res.send(''+sum);
 });
+//figuras geometricas
+app.get('/trianguloRectangulo/:base/:altura',(req,res)=>{
+    
+    let b = parseFloat(req.params.base);
+    let h = parseFloat(req.params.altura);
+    //Área
+    let area = (b * h) / 2;
+    //Perimetro
+    let hipotenusa = Math.sqrt((b ** 2) + (h ** 2));
+    let perimetro = b + h + hipotenusa;
+
+    res.json({
+        base: b,
+        altura: h,
+        area: area.toFixed(2),
+        perimetro: perimetro.toFixed(2)
+    });
+});
+app.get('/rombo/:dMayor/:dMenor/:lado',(req,res)=>{
+
+    let D = parseFloat(req.params.dMayor);
+    let d = parseFloat(req.params.dMenor);
+    let L = parseFloat(req.params.lado);
+
+    let area = (D * d) / 2;
+    let perimetro = 4 * L;
+
+    res.json({
+        diagonalMayor: D,
+        diagonalMenor: d,
+        lado: L,
+        area: area.toFixed(2),
+        perimetro: perimetro.toFixed(2)
+    });
+});
+app.get('/paralelogramo/:base/:altura/:lado',(req,res)=>{
+
+    let base = parseFloat(req.params.base);
+    let altura = parseFloat(req.params.altura);
+    let lado = parseFloat(req.params.lado);
+
+    let area = base * altura;
+    let perimetro = 2 * (base + lado);
+
+    res.json({
+        base: base,
+        altura: altura,
+        lado: lado,
+        area: area.toFixed(2),
+        perimetro: perimetro.toFixed(2)
+    });
+});
+
 app.listen(3000,()=>{
     console.log('Framework ejecutandose con éxito');
 });
