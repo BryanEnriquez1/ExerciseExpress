@@ -32,10 +32,9 @@ app.get('/trianguloRectangulo/:base/:altura',(req,res)=>{
     
     let b = parseFloat(req.params.base);
     let h = parseFloat(req.params.altura);
-    //Área
+    
     let area = (b * h) / 2;
-    //Perimetro
-    let hipotenusa = Math.sqrt((b ** 2) + (h ** 2));
+    let hipotenusa = Math.sqrt((b ** 2) + (h ** 2)); //Teorema de pitagoras
     let perimetro = b + h + hipotenusa;
 
     res.json({
