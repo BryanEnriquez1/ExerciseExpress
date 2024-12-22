@@ -78,6 +78,45 @@ app.get('/paralelogramo/:base/:altura/:lado',(req,res)=>{
         perimetro: perimetro.toFixed(2)
     });
 });
+app.get('/trinomioCuadradoPerfecto/:a/:b',(req,res)=>{
+
+    let fg1 = `(a+b)^2`;
+    let fg2 = `(a-b)^2`;
+    
+    let a = parseInt(req.params.a);
+    let b = parseInt(req.params.b);
+    //(a+b)2
+    let fb1 = `(${a} + ${b})^2`;
+    //(a-b)2
+    let fb2 = `(${a} - ${b})^2`; 
+    //a2+2ab+b2
+    let fb21 = `${a}^2 + 2(${a})(${b}) + ${b}^2`;
+    //a2-2ab+b2
+    let fb22 = `${a}^2 - 2(${a})(${b}) + ${b}^2`;
+
+    let a2 = Math.pow(a, 2); // a^2
+    let ab2 = 2 * (a * b);   // 2ab
+    let b2 = Math.pow(b, 2); // b^2
+
+    let fr1 = `${a2} + ${ab2} + ${b2}`;
+    let fr2 = `${a2} - ${ab2} + ${b2}`;
+
+    let r1 = a2 + ab2 + b2;
+    let r2 = a2 - ab2 + b2;
+
+    res.json({
+        fgeneral1: fg1,
+        fbase1: fb1,
+        fbase21: fb21,
+        fbase31: fr1,
+        total1: r1,
+        fgeneral2: fg2,
+        fbase2: fb2,
+        fbase22: fb22,
+        fbase32: fr2,
+        total2: r2
+    });
+});
 
 app.listen(3000,()=>{
     console.log('Framework ejecutandose con éxito');
