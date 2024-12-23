@@ -1,4 +1,5 @@
 const express = require('express');
+const algebra = require('algebra.js');
 const app = express();
 app.use(express.json());
 //lista json
@@ -78,9 +79,9 @@ app.get('/paralelogramo/:base/:altura/:lado',(req,res)=>{
         perimetro: perimetro.toFixed(2)
     });
 });
-app.get('/trinomioCuadradoPerfecto/:a/:b',(req,res)=>{
+app.get('/trinomioCuadradoPerfecto/:a/:b/:c', (req, res) => {
 
-    let fg1 = `(a+b)^2`;
+    /*let fg1 = `(a+b)^2`;
     let fg2 = `(a-b)^2`;
     
     let a = parseInt(req.params.a);
@@ -115,7 +116,37 @@ app.get('/trinomioCuadradoPerfecto/:a/:b',(req,res)=>{
         fbase22: fb22,
         fbase32: fr2,
         total2: r2
+    });*/
+    const a = parseInt(req.params.a); // Coeficiente de x^2
+    const b = parseInt(req.params.b); // Coeficiente de x
+    const c = parseInt(req.params.c); // Término independiente
+
+    // Validación de coeficientes
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        return res.status(400).json({ error: 'Por favor, ingresa valores válidos para a, b y c.' });
+    }
+
+    // Verifica si es un trinomio cuadrado perfecto
+    const raizA = Math.sqrt(a); // Raíz del coeficiente de x^2
+    const raizC = Math.sqrt(c); // Raíz del término independiente
+    const esTrinomioCuadradoPerfecto = raizA % 1 === 0 && raizC % 1 === 0 && b === -2 * raizA * raizC;
+
+    let resultadoFactorizacion;
+    if (esTrinomioCuadradoPerfecto) {
+        // Factorización como (a - b)^2
+        const signo = b > 0 ? '+' : '-';
+        resultadoFactorizacion = `(${raizA}x ${signo} ${Math.abs(raizC)})^2`;
+    } else {
+        resultadoFactorizacion = 'El trinomio no es un cuadrado perfecto.';
+    }
+
+    // Respuesta JSON
+    res.json({
+        trinomio: `${a}x^2 ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c}`,
+        esCuadradoPerfecto: esTrinomioCuadradoPerfecto,
+        factorizacion: resultadoFactorizacion
     });
+    
 });
 
 app.listen(3000,()=>{

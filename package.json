@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/BryanEnriquez1/ExerciseExpress#readme",
   "dependencies": {
+    "algebra.js": "^0.2.6",
     "express": "^4.21.2"
   }
 }
